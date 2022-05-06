@@ -323,39 +323,24 @@ int main(int argc, char *argv[]) {
   std::unique_ptr<ManifoldSurfaceMesh> mesh;
   std::unique_ptr<VertexPositionGeometry> geometry;
 
-#if 1
+#if 0
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/bumpy-round-cube/A-disk.obj");
-  const std::string landmarkGroups_str = "5105,20247;5433;5805,20013,20105;6722,20199;14143,20059;14839,20151;15941;17597";
+  const std::string landmarkGroups_str = "5105,20247;5433;5805,20013,20059;6722,20199;14143,20105;14839,20151;15941;17597";
 #endif
 
 #if 0
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/bumpy-round-cube/B-disk.obj");
-  const std::string landmarkGroups_str = "8713,9202;4828;6294,9048,9108;2669,9170;3288,9075;2977,9138;7543;1643";
+  const std::string landmarkGroups_str = "1643;2669,9172;2977;3288,9075;4828;6294,9048;7543,9108;8713,9140,9204";
 #endif
 
 #if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/A-disk.obj");
-  const std::string landmarkGroups_str = "111,2565;1111;1224;1526,2532,2547;2431,2618,2641#1268,2594;2518,2619";
+  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/vase/A-disk.obj");
+  const std::string landmarkGroups_str = "111,2566,2618;1111;1224;1526,2532;2431,2547,2640#1268,2595;2518,2619";
 #endif
 
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/B-disk.obj");
-  const std::string landmarkGroups_str = "1899,2582;9;2165;409,2552,2566;405,2630,2657#1014,2608;2538,2631";
-#endif
-
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/pretzel-tripletorus/A-disk.obj");
-  const std::string landmarkGroups_str = "9,2589;405,2628;409,2552,2573;1899,2654;2165#1014,2606;2538,2629";
-#endif
-
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/pretzel-tripletorus/A-disk.obj");
-  const std::string landmarkGroups_str = "952,2091,2166;954,2041,2127,2150;1507,2077,2107#109,2065;2026,2152;811,2078;2005,2129;1343,2093;1984,2108";
-#endif
-
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/hands/A-disk.obj");
-  const std::string landmarkGroups_str = "85;407;2703;3192;3803;3903;4649,11544;6538;6722,11421,11607;7058,11488,11502,11578;8012,11442,11675,11717;8349;8376,11462,11639;9037,11522;9491,11432;10759,11471;10767,11452";
+#if 1
+  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/vase/B-disk.obj");
+  const std::string landmarkGroups_str = "9,2588;405,2630,2652;409,2551,2572;1899;2165#1014,2605;2537,2631";
 #endif
 
   // For interoperability with libigl

@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   std::unique_ptr<ManifoldSurfaceMesh> mesh;
   std::unique_ptr<VertexPositionGeometry> geometry;
 
-#if 1
+#if 0
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/bumpy-round-cube/A-orig.obj");
   const std::set<int> landmarks = { 5105, 5433, 5805, 6722, 14143, 14839, 15941, 17597 };
 #endif
@@ -38,23 +38,13 @@ int main(int argc, char *argv[]) {
 #endif
 
 #if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/A-genus0.obj");
+  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/vase/A-genus0.obj");
   const std::set<int> landmarks = { 111, 1111, 1224, 1526, 2431, /* handle landmark pair */ 1268, 2518 };
 #endif
 
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/B-genus0.obj");
-  const std::set<int> landmarks = { 1899, 9, 2165, 409, 405, /* handle landmark pair */ 1014, 2538 };
-#endif
-
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/pretzel-tripletorus/A-genus0.obj");
-  const std::set<int> landmarks = { 201, 496, 952, 1463, 1507, 1, 847, 1332, 1986, 2006, 2026 };
-#endif
-
-#if 0
-  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/pretzel-tripletorus/B-genus0.obj");
-  const std::set<int> landmarks = { 3635, 1507, 2118, 4063, 1329, 3248, 2398, 1666, 4590, 4622, 4654 };
+#if 1
+  std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/vase/B-genus0.obj");
+  const std::set<int> landmarks = { 1899, 9, 2165, 409, 405, /* handle landmark pair */ 2537, 1014 };
 #endif
 
   std::unique_ptr<ManifoldSurfaceMesh> meshOrig;
