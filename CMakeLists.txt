@@ -31,6 +31,7 @@ function (fix_mosek_lib_path app)
 endfunction()
 
 # geometry-central
+set(GC_EIGEN_LOCATION ${CMAKE_CURRENT_LIST_DIR}/external/eigen CACHE PATH "Eigen path")
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/geometry-central)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/external/geometry-central/include)
 
