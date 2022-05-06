@@ -1,0 +1,29 @@
+[submodule "external/libigl"]
+	path = external/libigl
+	url = https://github.com/libigl/libigl
+[submodule "external/eigen"]
+	path = external/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+	branch = 3.4
+[submodule "external/geometry-central"]
+	path = external/geometry-central
+	url = https://github.com/kenshi84/geometry-central
+	branch = seamlesssurfmap
+[submodule "external/kt84"]
+	path = external/kt84
+	url = https://kenshi84@bitbucket.org/kenshi84/kt84.git
+[submodule "external/spdlog"]
+	path = external/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "external/args"]
+	path = external/args
+	url = https://github.com/Taywee/args
+[submodule "external/glfw"]
+	path = external/glfw
+	url = https://github.com/glfw/glfw
+[submodule "external/imgui"]
+	path = external/imgui
+	url = https://github.com/ocornut/imgui
+[submodule "external/ultimaille"]
+	path = external/ultimaille
+	url = https://github.com/kenshi84/ultimaille
