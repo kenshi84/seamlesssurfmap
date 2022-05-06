@@ -16,6 +16,8 @@ set(SEARCH_PATHS
   /usr/local/mosek/8/tools/platform/osx64x86/
   /usr/local/mosek/9.2/tools/platform/osx64x86/
   /usr/local/mosek/9.3/tools/platform/osx64x86/
+  /usr/local/mosek/10.0/tools/platform/osx64x86/
+  /usr/local/mosek/10.0/tools/platform/osxaarch64/
   /opt/mosek/7/tools/platform/linux64x86/
 )
 
