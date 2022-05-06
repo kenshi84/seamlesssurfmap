@@ -867,6 +867,7 @@ int main(int argc, char *argv[]) {
   args::HelpFlag help(parser, "help", "Display this help message", {'h', "help"});
   args::ValueFlag<std::string> argDataDir(parser, "path", "Path to the data directory to read from / write to (default: current directory)", {"data-dir"});
   args::Flag argWhiteBackground(parser, "white-background", "Use white background instead of vertical color gradient", {"white-background"});
+  args::Flag argWriteNormalized(parser, "write-normalized", "Write area-normalized mesh as *-normalized.obj", {"write-normalized"});
 
   // Parse args
   try {
@@ -915,7 +916,7 @@ int main(int argc, char *argv[]) {
     SPDLOG_INFO("{}'s' nVertices is {}, nFaces is {}", model.name, model.mesh->nVertices(), model.mesh->nFaces());
 
     // Write area-normalized mesh as *-normalized
-    {
+    if (args::get(argWriteNormalized)) {
       std::unique_ptr<VertexPositionGeometry> geom_normalized = model.geom->copy();
 
       geom_normalized->requireFaceAreas();
