@@ -22,18 +22,18 @@ int main() {
 #endif
 
 #if 1
-  std::tie(A_disk.mesh, A_disk.geom) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/A-disk.obj");
-  std::tie(B_disk.mesh, B_disk.geom) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/B-disk.obj");
+  std::tie(A_disk.mesh, A_disk.geom) = readManifoldSurfaceMesh(DATA_PATH "/vase/A-disk-refined.obj");
+  std::tie(B_disk.mesh, B_disk.geom) = readManifoldSurfaceMesh(DATA_PATH "/vase/B-disk-refined.obj");
   const std::vector<std::set<IntPair>> normalLandmarkGroups = {
-    { { 111, 1899 }, { 2565, 2582 } },
+    { { 111, 1899 }, { 2565, 2581 } },
     { { 1111, 9 } },
     { { 1224, 2165 } },
-    { { 1526, 409 }, { 2532, 2552 }, { 2547, 2566 } },
-    { { 2431, 405 }, { 2618, 2630 }, { 2641, 2657 } }
+    { { 1526, 409 }, { 2532, 2551 }, { 2547, 2565 } },
+    { { 2431, 405 }, { 2618, 2629 }, { 2641, 2656 } }
   };
   const std::vector<std::set<IntPair>> handleLandmarkGroups = {
-    { { 1268, 1014 }, { 2594, 2608 } },
-    { { 2518, 2538 }, { 2619, 2631 } }
+    { { 1268, 2537}, { 2594, 2607 } },
+    { { 2518, 1014}, { 2619, 2630 } }
   };
 #endif
 

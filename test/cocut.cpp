@@ -61,9 +61,9 @@ int main() {
   };
 #endif
 
-#if 0
-  std::tie(A_genus0.mesh, A_genus0.geom) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/A-genus0.obj");
-  std::tie(B_genus0.mesh, B_genus0.geom) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/B-genus0.obj");
+#if 1
+  std::tie(A_genus0.mesh, A_genus0.geom) = readManifoldSurfaceMesh(DATA_PATH "/vase/A-genus0.obj");
+  std::tie(B_genus0.mesh, B_genus0.geom) = readManifoldSurfaceMesh(DATA_PATH "/vase/B-genus0.obj");
   const std::set<IntPair> landmarks = {
     { 111 , 1899 },
     { 1111, 9    },
@@ -71,8 +71,8 @@ int main() {
     { 1526, 409  },
     { 2431, 405  },
     /* handle landmark pair */
-    { 1268, 1014 },
-    { 2518, 2538 }
+    { 1268, 2537 },
+    { 2518, 1014 }
   };
 #endif
 
@@ -125,7 +125,7 @@ int main() {
   };
 #endif
 
-#if 1
+#if 0
   std::tie(A_genus0.mesh, A_genus0.geom) = readManifoldSurfaceMesh(DATA_PATH "/../../cit-hot/data/schmidt20/duck-donut/A-genus0.obj");
   std::tie(B_genus0.mesh, B_genus0.geom) = readManifoldSurfaceMesh(DATA_PATH "/../../cit-hot/data/schmidt20/duck-donut/B-genus0.obj");
   const std::set<IntPair> landmarks = {

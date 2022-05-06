@@ -323,7 +323,7 @@ int main(int argc, char *argv[]) {
   std::unique_ptr<ManifoldSurfaceMesh> mesh;
   std::unique_ptr<VertexPositionGeometry> geometry;
 
-#if 0
+#if 1
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/bumpy-round-cube/A-disk.obj");
   const std::string landmarkGroups_str = "5105,20247;5433;5805,20013,20105;6722,20199;14143,20059;14839,20151;15941;17597";
 #endif
@@ -353,7 +353,7 @@ int main(int argc, char *argv[]) {
   const std::string landmarkGroups_str = "952,2091,2166;954,2041,2127,2150;1507,2077,2107#109,2065;2026,2152;811,2078;2005,2129;1343,2093;1984,2108";
 #endif
 
-#if 1
+#if 0
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/hands/A-disk.obj");
   const std::string landmarkGroups_str = "85;407;2703;3192;3803;3903;4649,11544;6538;6722,11421,11607;7058,11488,11502,11578;8012,11442,11675,11717;8349;8376,11462,11639;9037,11522;9491,11432;10759,11471;10767,11452";
 #endif

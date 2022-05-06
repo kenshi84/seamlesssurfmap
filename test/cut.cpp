@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   std::unique_ptr<ManifoldSurfaceMesh> mesh;
   std::unique_ptr<VertexPositionGeometry> geometry;
 
-#if 0
+#if 1
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/bumpy-round-cube/A-orig.obj");
   const std::set<int> landmarks = { 5105, 5433, 5805, 6722, 14143, 14839, 15941, 17597 };
 #endif
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
   const std::set<int> landmarks = { 111, 1111, 1224, 1526, 2431, /* handle landmark pair */ 1268, 2518 };
 #endif
 
-#if 1
+#if 0
   std::tie(mesh, geometry) = readManifoldSurfaceMesh(DATA_PATH "/schmidt20/vase/B-genus0.obj");
   const std::set<int> landmarks = { 1899, 9, 2165, 409, 405, /* handle landmark pair */ 1014, 2538 };
 #endif
