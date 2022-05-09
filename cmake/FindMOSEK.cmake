@@ -19,6 +19,7 @@ set(SEARCH_PATHS
   /usr/local/mosek/10.0/tools/platform/osx64x86/
   /usr/local/mosek/10.0/tools/platform/osxaarch64/
   /opt/mosek/7/tools/platform/linux64x86/
+  /opt/mosek/10.0/tools/platform/linux64x86/
 )
 
 find_path(MOSEK_INCLUDE_DIR mosek.h

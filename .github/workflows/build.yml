@@ -1,0 +1,69 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build-macos:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: download & extract MOSEK
+      run: |
+        sudo wget https://download.mosek.com/stable/10.0.13/mosektoolsosx64x86.tar.bz2
+        sudo tar xvf mosektoolsosx64x86.tar.bz2
+      working-directory: /usr/local
+    - name: install MOSEK & Fusion
+      run: |
+        sudo python bin/install.py
+        sudo make -C src/fusion_cxx install -j3
+      working-directory: /usr/local/mosek/10.0/tools/platform/osx64x86
+    - name: build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make -j3
+    - name: archive
+      run: |
+        mkdir ssm-artifact
+        cp handlecut landmarker seamlesssurfmap test_cocut test_conformal test_cut test_gflatten test_gmap test_handlecut test_isometric test_lift test_lo1 test_refine test_tutte test_util untangle ssm-artifact
+        tar cvjf ssm-artifact.tar.bz2 ssm-artifact
+      working-directory: build
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ssm-artifact-macos.tar.bz2
+        path: build/ssm-artifact.tar.bz2
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: install dependencies
+      run: sudo apt-get install libglu1-mesa-dev mesa-common-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+    - name: install MOSEK
+      run: |
+        sudo wget https://download.mosek.com/stable/10.0.13/mosektoolslinux64x86.tar.bz2
+        sudo tar xvf mosektoolslinux64x86.tar.bz2
+      working-directory: /opt
+    - name: install MOSEK Fusion
+      run: |
+        sudo make -C src/fusion_cxx install -j3
+      working-directory: /opt/mosek/10.0/tools/platform/linux64x86
+    - name: build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make -j3
+    - name: archive
+      run: |
+        mkdir ssm-artifact
+        cp handlecut landmarker seamlesssurfmap test_cocut test_conformal test_cut test_gflatten test_gmap test_handlecut test_isometric test_lift test_lo1 test_refine test_tutte test_util untangle ssm-artifact
+        tar cvjf ssm-artifact.tar.bz2 ssm-artifact
+      working-directory: build
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ssm-artifact-linux.tar.bz2
+        path: build/ssm-artifact.tar.bz2

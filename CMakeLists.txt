@@ -14,6 +14,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 
+set(EXTRA_LIBS "")
+if (UNIX AND NOT APPLE)
+  set(EXTRA_LIBS "pthread")
+endif()
+message("EXTRA_LIBS: ${EXTRA_LIBS}")
+
 #--------------------+
 # External libraries |
 #--------------------+
@@ -24,6 +30,9 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/external)
 find_package(MOSEK REQUIRED)
 include_directories(${MOSEK_INCLUDE_DIR})
 function (fix_mosek_lib_path app)
+  if (NOT APPLE)
+    return()
+  endif()
   # Convince cmake to fix the linker path for mosek
   # http://www.alecjacobson.com/weblog/?p=4878
   add_custom_command(TARGET ${app} POST_BUILD COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change `otool -L ${app} | sed -n -e \""s/.*\\(libmosek.*dylib\\).*/\\1/p"\"` ${MOSEK_C_LIBRARY} ${app})
@@ -130,17 +139,17 @@ target_link_libraries(refine util)
 
 # Tutte embedding test
 add_executable(test_tutte test/tutte.cpp)
-target_link_libraries(test_tutte ${MOSEK_C_LIBRARY} ${MOSEK_CXX_LIBRARY})
+target_link_libraries(test_tutte ${MOSEK_C_LIBRARY} ${MOSEK_CXX_LIBRARY} ${EXTRA_LIBS})
 fix_mosek_lib_path(test_tutte)
 
 # Isometric mapping test
 add_executable(test_isometric test/isometric.cpp)
-target_link_libraries(test_isometric util ${MOSEK_C_LIBRARY} ${MOSEK_CXX_LIBRARY})
+target_link_libraries(test_isometric util ${MOSEK_C_LIBRARY} ${MOSEK_CXX_LIBRARY} ${EXTRA_LIBS})
 fix_mosek_lib_path(test_isometric)
 
 # Conformal mapping test
 add_executable(test_conformal test/conformal.cpp)
-target_link_libraries(test_conformal util ${MOSEK_C_LIBRARY} ${MOSEK_CXX_LIBRARY})
+target_link_libraries(test_conformal util ${MOSEK_C_LIBRARY} ${MOSEK_CXX_LIBRARY} ${EXTRA_LIBS})
 fix_mosek_lib_path(test_conformal)
 
 # G-flattening test
