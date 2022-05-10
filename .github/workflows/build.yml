@@ -25,14 +25,16 @@ jobs:
         make -j3
     - name: archive
       run: |
-        mkdir ssm-artifact
-        cp handlecut landmarker seamlesssurfmap test_cocut test_conformal test_cut test_gflatten test_gmap test_handlecut test_isometric test_lift test_lo1 test_refine test_tutte test_util untangle ssm-artifact
-        tar cvjf ssm-artifact.tar.bz2 ssm-artifact
+        mkdir ssm-artifact-macos
+        cp handlecut landmarker seamlesssurfmap test_cocut test_conformal test_cut test_gflatten test_gmap test_handlecut test_isometric test_lift test_lo1 test_refine test_tutte test_util untangle ssm-artifact-macos
+        tar cvjf ssm-artifact-macos.tar.bz2 ssm-artifact-macos
       working-directory: build
     - uses: actions/upload-artifact@v3
       with:
         name: ssm-artifact-macos.tar.bz2
-        path: build/ssm-artifact.tar.bz2
+        path: build/ssm-artifact-macos.tar.bz2
+    - name: upload to transfer.sh
+      run: curl --upload-file build/ssm-artifact-macos.tar.bz2 https://transfer.sh/ssm-artifact-macos.tar.bz2
 
   build-linux:
     runs-on: ubuntu-latest
@@ -59,11 +61,13 @@ jobs:
         make -j3
     - name: archive
       run: |
-        mkdir ssm-artifact
-        cp handlecut landmarker seamlesssurfmap test_cocut test_conformal test_cut test_gflatten test_gmap test_handlecut test_isometric test_lift test_lo1 test_refine test_tutte test_util untangle ssm-artifact
-        tar cvjf ssm-artifact.tar.bz2 ssm-artifact
+        mkdir ssm-artifact-linux
+        cp handlecut landmarker seamlesssurfmap test_cocut test_conformal test_cut test_gflatten test_gmap test_handlecut test_isometric test_lift test_lo1 test_refine test_tutte test_util untangle ssm-artifact-linux
+        tar cvjf ssm-artifact-linux.tar.bz2 ssm-artifact-linux
       working-directory: build
     - uses: actions/upload-artifact@v3
       with:
         name: ssm-artifact-linux.tar.bz2
-        path: build/ssm-artifact.tar.bz2
+        path: build/ssm-artifact-linux.tar.bz2
+    - name: upload to transfer.sh
+      run: curl --upload-file build/ssm-artifact-linux.tar.bz2 https://transfer.sh/ssm-artifact-linux.tar.bz2
