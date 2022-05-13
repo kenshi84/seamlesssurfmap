@@ -55,6 +55,7 @@ using geometrycentral::surface::IntrinsicGeometryInterface;
 using geometrycentral::surface::EmbeddedGeometryInterface;
 using geometrycentral::surface::VertexPositionGeometry;
 using geometrycentral::surface::readManifoldSurfaceMesh;
+using geometrycentral::surface::readParameterizedManifoldSurfaceMesh;
 using geometrycentral::surface::VertexData;
 using geometrycentral::surface::FaceData;
 using geometrycentral::surface::EdgeData;
@@ -154,6 +155,7 @@ struct fmt::formatter<SurfacePoint> : public formatter<std::string> {
 struct MeshGeometry {
   std::unique_ptr<ManifoldSurfaceMesh> mesh;
   std::unique_ptr<VertexPositionGeometry> geom;
+  std::unique_ptr<CornerData<Vector2>> uv;
 };
 
 template <typename T>

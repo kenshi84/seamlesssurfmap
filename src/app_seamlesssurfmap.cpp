@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
     const fs::path path_orig = path_data_dir / (model.name + "-orig.obj");
     ensure_existence(path_orig);
 
-    std::tie(model.orig.mesh, model.orig.geom) = readManifoldSurfaceMesh(path_orig);
+    std::tie(model.orig.mesh, model.orig.geom, model.orig.uv) = readParameterizedManifoldSurfaceMesh(path_orig);
 
     ASSERT_WITH_LOG(model.orig.mesh->nConnectedComponents() == 1, "{}-orig has multiple connected components ({})", model.name, model.orig.mesh->nConnectedComponents());
     ASSERT_WITH_LOG(model.orig.mesh->nBoundaryLoops() == 0, "{}-orig is not closed", model.name);
@@ -160,7 +160,11 @@ int main(int argc, char *argv[]) {
       refine(landmarks, model.orig, model.genus0, model.disk);
 
       // Write results
-      writeSurfaceMesh(*model.orig.mesh, *model.orig.geom, path_data_dir / (model.name + "-orig-refined.obj"));
+      if (model.orig.uv) {
+        writeSurfaceMesh(*model.orig.mesh, *model.orig.geom, *model.orig.uv, path_data_dir / (model.name + "-orig-refined.obj"));
+      } else {
+        writeSurfaceMesh(*model.orig.mesh, *model.orig.geom, path_data_dir / (model.name + "-orig-refined.obj"));
+      }
       if (nHandles > 0) {
         writeSurfaceMesh(*model.genus0.mesh, *model.genus0.geom, path_data_dir / (model.name + "-genus0-refined.obj"));
       }

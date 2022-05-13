@@ -21,15 +21,37 @@ void splitEdge(MeshGeometry& mg, const SplitEdgeInfo& sei) {
   // Retrieve halfedge to be split
   Halfedge he = halfedgeInTriangleByIndex(mg.mesh->face(sei.fIndex), sei.heIndexInF);
 
+  // Set he's orientation to canonical
+  he = he.edge().halfedge();
+
   // Take edge endpoints for later use
   Vector3 p0 = mg.geom->vertexPositions[he.tailVertex()];
   Vector3 p1 = mg.geom->vertexPositions[he.tipVertex()];
+
+  // If UVs are present, copy them as well
+  Vector2 qL, qR;
+  if (mg.uv) {
+    Vector2 qL0 = (*mg.uv)[he.corner()];
+    Vector2 qL1 = (*mg.uv)[he.next().corner()];
+    qL = 0.5 * (qL0 + qL1);
+
+    Vector2 qR0 = (*mg.uv)[he.twin().corner()];
+    Vector2 qR1 = (*mg.uv)[he.twin().next().corner()];
+    qR = 0.5 * (qR0 + qR1);
+  }
 
   // Perform split, get pointer to newly inserted vertex
   Vertex vNew = mg.mesh->splitEdgeTriangular(he.edge()).vertex();
 
   // Set position of the new vertex to the midpoint of the previous edge endpoints
   mg.geom->vertexPositions[vNew] = 0.5 * (p0 + p1);
+
+  if (mg.uv) {
+    (*mg.uv)[he.corner()] = qL;
+    (*mg.uv)[he.prevOrbitFace().twin().corner()] = qL;
+    (*mg.uv)[he.twin().next().corner()] = qR;
+    (*mg.uv)[he.twin().next().twin().next().corner()] = qR;
+  }
 }
 
 }
