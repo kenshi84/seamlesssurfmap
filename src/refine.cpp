@@ -29,15 +29,16 @@ void splitEdge(MeshGeometry& mg, const SplitEdgeInfo& sei) {
   Vector3 p1 = mg.geom->vertexPositions[he.tipVertex()];
 
   // If UVs are present, copy them as well
-  Vector2 qL, qR;
+  Vector2 qL0, qL1, qL2;
+  Vector2 qR0, qR1, qR2;
   if (mg.uv) {
-    Vector2 qL0 = (*mg.uv)[he.corner()];
-    Vector2 qL1 = (*mg.uv)[he.next().corner()];
-    qL = 0.5 * (qL0 + qL1);
+    qL0 = (*mg.uv)[he.corner()];
+    qL1 = (*mg.uv)[he.next().corner()];
+    qL2 = (*mg.uv)[he.next().next().corner()];
 
-    Vector2 qR0 = (*mg.uv)[he.twin().corner()];
-    Vector2 qR1 = (*mg.uv)[he.twin().next().corner()];
-    qR = 0.5 * (qR0 + qR1);
+    qR0 = (*mg.uv)[he.twin().corner()];
+    qR1 = (*mg.uv)[he.twin().next().corner()];
+    qR2 = (*mg.uv)[he.twin().next().next().corner()];
   }
 
   // Perform split, get pointer to newly inserted vertex
@@ -47,10 +48,11 @@ void splitEdge(MeshGeometry& mg, const SplitEdgeInfo& sei) {
   mg.geom->vertexPositions[vNew] = 0.5 * (p0 + p1);
 
   if (mg.uv) {
-    (*mg.uv)[he.corner()] = qL;
-    (*mg.uv)[he.prevOrbitFace().twin().corner()] = qL;
-    (*mg.uv)[he.twin().next().corner()] = qR;
-    (*mg.uv)[he.twin().next().twin().next().corner()] = qR;
+    (*mg.uv)[he.corner()]               = (*mg.uv)[he.prevOrbitFace().twin().corner()]      = 0.5 * (qL0 + qL1);
+    (*mg.uv)[he.twin().next().corner()] = (*mg.uv)[he.twin().next().twin().next().corner()] = 0.5 * (qR0 + qR1);
+    (*mg.uv)[he.prevOrbitFace().corner()] = qL2;
+    (*mg.uv)[he.prevOrbitFace().twin().prevOrbitFace().corner()] = qL0;
+    (*mg.uv)[he.twin().next().twin().corner()] = qR2;
   }
 }
 
