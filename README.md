@@ -1,3 +1,5 @@
+![teaser](doc/teaser.png)
+
 # An unofficial implementation of Seamless Surface Mappings (Aigerman et al., SIGGRAPH 2015)
 
 This is an unofficial implementation of the following publication:
