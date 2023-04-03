@@ -456,9 +456,9 @@ void gmap(
 
     model.nV = model.V.rows();
 
-    ASSERT_WITH_LOG(model.mesh->genus() == 0, "{}'s genus is wrong ({})", model.mesh->genus());
-    ASSERT_WITH_LOG(model.mesh->nConnectedComponents() == 1, "{}'s #connectedComponents is wrong ({})", model.mesh->nConnectedComponents());
-    ASSERT_WITH_LOG(model.mesh->nBoundaryLoops() == 1, "{}'s #boundaryLoops is wrong ({})", model.mesh->nBoundaryLoops());
+    ASSERT_WITH_LOG(model.mesh->genus() == 0, "{}'s genus is wrong ({})", model.name, model.mesh->genus());
+    ASSERT_WITH_LOG(model.mesh->nConnectedComponents() == 1, "{}'s #connectedComponents is wrong ({})", model.name, model.mesh->nConnectedComponents());
+    ASSERT_WITH_LOG(model.mesh->nBoundaryLoops() == 1, "{}'s #boundaryLoops is wrong ({})", model.name, model.mesh->nBoundaryLoops());
 
     // Normalize area for better behavior in conformal mapping computation (which is initially equivalent to isometric mapping)
     VectorXd dblA;
