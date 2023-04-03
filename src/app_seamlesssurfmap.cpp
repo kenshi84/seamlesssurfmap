@@ -236,5 +236,24 @@ int main(int argc, char *argv[]) {
     writeSurfaceMesh(*modelP.orig.mesh, P_geom, path_data_dir / (modelP.name + "on" + modelQ.name + ".obj"));
   });
 
+  forEachModel2([&](Model& modelP, Model& modelQ) {
+    if (modelP.orig.uv) {
+      SPDLOG_INFO("Writing {}-with-{}-uv.obj", modelQ.name, modelP.name);
+
+      // Construct per-vertex UV on P
+      VertexData<Vector2> P_uv(*modelP.orig.mesh);
+      for (Vertex vP : modelP.orig.mesh->vertices())
+        P_uv[vP] = (*modelP.orig.uv)[vP.corner()];
+
+      // Transfer P_uv to Q
+      CornerData<Vector2> Q_uv(*modelQ.orig.mesh);
+      for (Vertex vQ : modelQ.orig.mesh->vertices()) {
+        for (Corner cQ : vQ.adjacentCorners())
+          Q_uv[cQ] = modelQ.vertexImage[vQ].interpolate(P_uv);
+      }
+      writeSurfaceMesh(*modelQ.orig.mesh, *modelQ.orig.geom, Q_uv, path_data_dir / (modelQ.name + "-with-" + modelP.name + "-uv.obj"));
+    }
+  });
+
   return 0;
 }
