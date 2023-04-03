@@ -201,6 +201,10 @@ add_executable(app_untangle src/app_untangle.cpp)
 target_link_libraries(app_untangle untangle util version)
 set_target_properties(app_untangle PROPERTIES OUTPUT_NAME untangle)   # https://gist.github.com/jlgerber/eafc4ee2b9954e27dd2bb009496b1b03
 
+# UV Projector app
+add_executable(uvprojector src/app_uvprojector.cpp)
+target_link_libraries(uvprojector glew imgui geometry-central)
+
 # GoogleTest
 include(FetchContent)
 FetchContent_Declare(
